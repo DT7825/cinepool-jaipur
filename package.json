@@ -1,0 +1,19 @@
+{
+  "name": "picturehouse-jaipur",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "vite build"
+  },
+  "dependencies": {
+    "@clerk/react": "^6.17.8",
+    "@vitejs/plugin-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest"
+  }
+}
