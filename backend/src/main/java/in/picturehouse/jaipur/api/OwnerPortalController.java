@@ -122,7 +122,7 @@ public class OwnerPortalController {
     public ShowSales updateShowtime(@PathVariable Long showtimeId,@Valid @RequestBody ShowtimeRequest request,@AuthenticationPrincipal Jwt jwt){
         Showtime show=showtimes.findById(showtimeId).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Showtime not found."));
         Long theatreId=show.getScreen().getTheatre().getId();requireTheatreAccess(jwt.getSubject(),theatreId);
-        Screen screen=screens.findById(request.screenId()).filter(s->s.getTheatre().getId().equals(theatreId)).orElseThrow(()->new ResponseStatusException(HttpStatus.FORBIDDEN,"Choose a screen in the same assigned theatre."));
+        screens.findById(request.screenId()).filter(s->s.getTheatre().getId().equals(theatreId)).orElseThrow(()->new ResponseStatusException(HttpStatus.FORBIDDEN,"Choose a screen in the same assigned theatre."));
         if(!request.startsAt().isAfter(LocalDateTime.now()))throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Showtime must be in the future.");
         show.reschedule(request.startsAt(),request.format().trim());
         return showSales(show,0,0);

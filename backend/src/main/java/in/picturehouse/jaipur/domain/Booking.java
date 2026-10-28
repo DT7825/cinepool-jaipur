@@ -13,6 +13,7 @@ public class Booking {
     @Enumerated(EnumType.STRING) private BookingStatus status=BookingStatus.PENDING_PAYMENT;
     private int totalPaise;
     private Instant createdAt=Instant.now();
+    @SuppressWarnings("unused") // JPA persists this legacy field through reflection.
     private String entryTokenHash;
     protected Booking() {}
     public Booking(Account customer,Showtime showtime,int totalPaise){this.customer=customer;this.showtime=showtime;this.totalPaise=totalPaise;}

@@ -2,7 +2,6 @@ package in.picturehouse.jaipur.api;
 
 import in.picturehouse.jaipur.domain.Movie;
 import in.picturehouse.jaipur.domain.Showtime;
-import in.picturehouse.jaipur.domain.ShowtimeSeat;
 import in.picturehouse.jaipur.domain.Theatre;
 import in.picturehouse.jaipur.repository.MovieRepository;
 import in.picturehouse.jaipur.repository.ShowtimeRepository;

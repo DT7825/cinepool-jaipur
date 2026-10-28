@@ -1,12 +1,14 @@
 package in.picturehouse.jaipur.api;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import in.picturehouse.jaipur.domain.TicketBooking;
 import in.picturehouse.jaipur.repository.TicketBookingRepository;
 import in.picturehouse.jaipur.integration.TicketEmailService;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -61,8 +63,8 @@ public class TicketController {
             ByteArrayOutputStream png = new ByteArrayOutputStream();
             MatrixToImageWriter.writeToStream(matrix, "PNG", png);
             return "data:image/png;base64," + Base64.getEncoder().encodeToString(png.toByteArray());
-        } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not create this ticket's QR code.");
+        } catch (WriterException | IOException exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not create this ticket's QR code.", exception);
         }
     }
 
